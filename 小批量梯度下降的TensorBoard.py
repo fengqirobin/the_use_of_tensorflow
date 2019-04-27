@@ -31,8 +31,12 @@ X = tf.placeholder(tf.float32, shape=(None, n + 1), name="X")
 y = tf.placeholder(tf.float32, shape=(None, 1), name="y")
 theta = tf.Variable(tf.random_uniform([n + 1, 1], -1.0, 1.0, seed=42), name="theta")  #对theta进行初始化
 y_pred = tf.matmul(X, theta, name="predictions")
-error = y_pred - y
-mse = tf.reduce_mean(tf.square(error), name="mse")
+
+#可以定义一个命名作用域,以免图变得杂乱庞大
+with tf.name_scope("loss") as scope:
+    error = y_pred - y
+    mse = tf.reduce_mean(tf.square(error), name="mse")
+
 optimizer = tf.train.GradientDescentOptimizer(learning_rate=learning_rate)  #梯度下降优化器
 training_op = optimizer.minimize(mse)  ##使用梯度下降优化器进行求梯度下降
 
