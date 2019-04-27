@@ -1,0 +1,2 @@
+# the_use_of_tensorflow
+通过小批量下降的实例来进行TensorBoard,模块化和共享变量的练习
